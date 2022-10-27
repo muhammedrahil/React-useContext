@@ -1,25 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import React,{useState} from 'react'
+import { Route, BrowserRouter, Link, Routes } from 'react-router-dom'
+import About from './componece/About'
+import Contact from './componece/Contact'
+import {Appcontext} from './AppContext'
+
 
 function App() {
+  const [state,setState]=useState(40)
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <BrowserRouter>
+        <Link to={'/about'}>about</Link>
+        <Link to={'/contact'}>Contact</Link>
+        <Appcontext.Provider value={{data:state}}>
+        <Routes>
+          <Route path='/about' element={<About />} ></Route>
+          <Route path='/contact' element={<Contact />} ></Route>
+        </Routes>
+        </Appcontext.Provider>
+      </BrowserRouter>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
